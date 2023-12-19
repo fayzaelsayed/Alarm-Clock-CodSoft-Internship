@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.splash.SplashFragment">
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_alarm_clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alarm_clock"
+            android:layout_marginTop="@dimen/_70sdp"
+            android:textColor="@color/beige"
+            android:textSize="@dimen/_50ssp"
+            android:fontFamily="sans-serif-condensed-medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_tick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_80sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="cursive"
+            android:text="@string/tick"
+            android:textAlignment="center"
+            android:textColor="@color/beige"
+            android:textSize="@dimen/_40ssp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_tock"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_alarm_clock" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_tock"
+            android:layout_marginEnd="@dimen/_80sdp"
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="@string/tock"
+            android:fontFamily="cursive"
+            android:textSize="@dimen/_40ssp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textColor="@color/beige"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_tick"
+            app:layout_constraintTop_toBottomOf="@+id/tv_alarm_clock" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:visibility="gone"
+            android:id="@+id/lottieAnimationView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_250sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tick"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/alarm_splash_animation" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
