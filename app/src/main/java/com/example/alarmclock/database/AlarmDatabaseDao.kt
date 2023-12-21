@@ -15,10 +15,13 @@ interface AlarmDatabaseDao {
     fun deleteAlarm(alarmEntity: AlarmEntity)
 
     @Query("UPDATE alarm_clock_table SET alarmState = :state WHERE id = :key ")
-    fun updateAlarmState(key: String, state: String)
+    fun updateAlarmState(key: Int, state: String)
 
     @Update
     fun updateAlarm(alarmEntity: AlarmEntity)
+
+    @Query("UPDATE alarm_clock_table SET alarmDate = :date WHERE id = :key ")
+    fun updateAlarmDate(key: Int, date:String)
 
 
 }

@@ -1,12 +1,17 @@
 package com.example.alarmclock.ui.splash
 
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.alarmclock.R
 import com.example.alarmclock.databinding.FragmentSplashBinding
@@ -25,6 +30,8 @@ class SplashFragment : BaseFragment(false) {
     private lateinit var leftText: Animation
     private lateinit var rightText: Animation
     private lateinit var lottieAnimation: Animation
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,6 +57,8 @@ class SplashFragment : BaseFragment(false) {
             delay(3000)
             findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
         }
+
         return binding.root
     }
+
 }

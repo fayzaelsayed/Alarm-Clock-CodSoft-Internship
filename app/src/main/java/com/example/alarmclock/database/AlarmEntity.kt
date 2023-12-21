@@ -8,8 +8,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity(tableName = "alarm_clock_table")
 data class AlarmEntity(
-    @PrimaryKey(autoGenerate = false)
-    val id: String,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
     var alarmName: String,
     var alarmTime: String,
     var alarmDate: String,

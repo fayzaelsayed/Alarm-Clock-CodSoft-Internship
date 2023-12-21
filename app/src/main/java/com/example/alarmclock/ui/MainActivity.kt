@@ -5,15 +5,23 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.alarmclock.R
 import com.example.alarmclock.databinding.ActivityMainBinding
+import com.example.alarmclock.ui.home.HomeFragmentDirections
+import com.example.alarmclock.ui.management.AlarmManagementFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private lateinit var appBarConfig: AppBarConfiguration
+    private var destinationName = "home"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -30,6 +38,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.management -> navController.navigate(R.id.alarmManagementFragment)
             }
         }
+
     }
     fun isBottomAppBarVisible(isVisible: Boolean) {
         if (isVisible) {

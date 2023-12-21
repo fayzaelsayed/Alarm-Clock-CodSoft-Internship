@@ -11,11 +11,17 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.alarmclock.R
+import com.example.alarmclock.alarmmanager.AndroidAlarmScheduler
 import com.example.alarmclock.database.AlarmEntity
 import com.example.alarmclock.databinding.FragmentAlarmManagementBinding
 import com.example.alarmclock.utils.Action
 import com.example.alarmclock.utils.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class AlarmManagementFragment : BaseFragment(true) {
@@ -23,12 +29,14 @@ class AlarmManagementFragment : BaseFragment(true) {
     private lateinit var alarmAdapter: AlarmAdapter
     private lateinit var alarmsList: MutableList<AlarmEntity>
     private val viewModel: AlarmManagementViewModel by viewModels()
+    private lateinit var scheduler: AndroidAlarmScheduler
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentAlarmManagementBinding.inflate(inflater, container, false)
+        scheduler = AndroidAlarmScheduler(requireContext())
         binding.ibAdd.setOnClickListener {
             findNavController().navigate(AlarmManagementFragmentDirections.actionAlarmManagementFragmentToAlarmSettingFragment(null))
         }
@@ -42,6 +50,14 @@ class AlarmManagementFragment : BaseFragment(true) {
                 val newList = ArrayList<AlarmEntity>()
                 newList.addAll(alarmsList)
                 alarmAdapter.submitList(newList)
+
+                if (alarmsList.isEmpty()) {
+                    binding.lottieAnimationView.visibility = View.VISIBLE
+                    binding.tvNoAlarms.visibility = View.VISIBLE
+                } else {
+                    binding.lottieAnimationView.visibility = View.GONE
+                    binding.tvNoAlarms.visibility = View.GONE
+                }
             }
         }
 
@@ -94,6 +110,7 @@ class AlarmManagementFragment : BaseFragment(true) {
 
         yesButton.setOnClickListener {
             viewModel.deleteAlarmFromDatabase(alarmEntity)
+            scheduler.cancel(alarmEntity)
             builder.dismiss()
         }
 
@@ -107,8 +124,52 @@ class AlarmManagementFragment : BaseFragment(true) {
     fun updateState(alarmEntity: AlarmEntity) {
         if (alarmEntity.alarmState == "on") {
             viewModel.updateAlarmState(alarmEntity.id, "off")
+            scheduler.cancel(alarmEntity)
         } else {
-            viewModel.updateAlarmState(alarmEntity.id, "on")
+            val comparisonResult = compareDates(alarmEntity.alarmDate, alarmEntity.alarmTime)
+            when {
+                comparisonResult < 0 -> {
+                    //in future
+                    viewModel.updateAlarmState(alarmEntity.id, "on")
+                    scheduler.schedule(alarmEntity)
+
+            }
+                comparisonResult > 0 -> {
+                    //in paste
+                    viewModel.updateAlarmState(alarmEntity.id, "on")
+                    viewModel.updateDate(alarmEntity.id, getTomorrowDate(alarmEntity.alarmDate))
+                    scheduler.schedule(alarmEntity)
+            }
+                else -> {
+                    viewModel.updateAlarmState(alarmEntity.id, "on")
+                    scheduler.schedule(alarmEntity)
+            }
+            }
+
         }
     }
+
+
+    private fun compareDates(otherDateString: String, otherTimeString: String): Int {
+        val dateFormat = SimpleDateFormat("dd.MMMM yyyy HH:mm a", Locale.getDefault())
+        val currentDateTimeString = SimpleDateFormat("dd.MMMM yyyy HH:mm a", Locale.getDefault()).format(Date())
+        val currentDate = dateFormat.parse(currentDateTimeString)
+        val otherDateTimeString = "$otherDateString $otherTimeString"
+        val otherDate = dateFormat.parse(otherDateTimeString)
+
+        return currentDate.compareTo(otherDate)
+    }
+
+
+    private fun getTomorrowDate(inputDateString: String): String {
+        val inputDateFormat = SimpleDateFormat("dd.MMMM yyyy", Locale.getDefault())
+        val inputDate: Date = inputDateFormat.parse(inputDateString)!!
+        val calendar = Calendar.getInstance()
+        calendar.time = inputDate
+        calendar.add(Calendar.DAY_OF_MONTH, 1)
+        return SimpleDateFormat("dd.MMMM yyyy", Locale.getDefault()).format(calendar.time)
+    }
+
+
+
 }

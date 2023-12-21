@@ -6,15 +6,22 @@
         android:id="@+id/home"
         android:icon="@drawable/home"
         android:title="@string/clock"
-        app:cnb_backgroundColor="#33910A0A"
-        app:cnb_iconColor="#910A0A"/>
+        app:cnb_backgroundColor="#FFFFFF"
+        app:cnb_iconColor="#409d37"/>
+
+    <item
+        android:id="@+id/blank"
+        android:title=""
+        android:enabled="false"
+        app:showAsAction="ifRoom"/>
+
 
     <item
         android:id="@+id/management"
         android:title="@string/alarm"
         android:icon="@drawable/alarm"
-        app:cnb_backgroundColor="#334CAF50"
-        app:cnb_iconColor="#4CAF50"/>
+        app:cnb_backgroundColor="#FFFFFF"
+        app:cnb_iconColor="#409d37"/>
 
 
 </menu>

@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:text="@string/alarm_clock"
             android:layout_marginTop="@dimen/_70sdp"
-            android:textColor="@color/beige"
+            android:textColor="@color/green"
             android:textSize="@dimen/_50ssp"
             android:fontFamily="sans-serif-condensed-medium"
             app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
             android:fontFamily="cursive"
             android:text="@string/tick"
             android:textAlignment="center"
-            android:textColor="@color/beige"
+            android:textColor="@color/green"
             android:textSize="@dimen/_40ssp"
             app:layout_constraintEnd_toStartOf="@+id/tv_tock"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +49,7 @@
             android:fontFamily="cursive"
             android:textSize="@dimen/_40ssp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:textColor="@color/beige"
+            android:textColor="@color/green"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tv_tick"
@@ -66,7 +66,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_tick"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/alarm_splash_animation" />
+            app:lottie_rawRes="@raw/splash_animation" />
 
 
 

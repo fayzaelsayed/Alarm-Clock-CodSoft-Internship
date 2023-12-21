@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/beige">
+        android:background="@color/lighter_grey">
 
         <TextView
             android:id="@+id/tv_delete_alarm"
@@ -21,7 +21,7 @@
             android:layout_marginEnd="@dimen/_15sdp"
             android:text="@string/are_you_sure_you_want_to_delete_this_alarm"
             android:textAlignment="center"
-            android:textColor="@color/purple"
+            android:textColor="@color/green"
             android:textSize="@dimen/_18ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

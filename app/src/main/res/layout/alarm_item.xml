@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
 
     <data>
 
@@ -13,89 +14,94 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/ib_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/delete"
-            app:layout_constraintBottom_toTopOf="@+id/card_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.85"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
+            android:layout_height="@dimen/_100sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_1sdp"
+            android:layout_marginVertical="@dimen/_10sdp"
             app:cardCornerRadius="@dimen/_20sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ib_delete">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cv_alarm_item"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/purple">
+                android:background="@color/light_green">
+
+                <ImageButton
+                    android:id="@+id/ib_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/delete"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/switch_button" />
 
                 <TextView
                     android:id="@+id/tv_alarm_time"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_150sdp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="@{alarm.alarmTime}"
-                    android:textColor="@color/beige"
-                    android:textSize="@dimen/_18ssp"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_20ssp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tool:text="12:12 PM" />
 
                 <TextView
                     android:id="@+id/tv_alarm_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_150sdp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:text="@{alarm.alarmName}"
-                    android:textColor="@color/beige"
-                    android:textSize="@dimen/_12ssp"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/switch_button"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_alarm_time" />
+                    tool:layout_editor_absoluteX="16dp"
+                    tool:layout_editor_absoluteY="16dp"
+                    tool:text="@string/alarm_clock" />
 
                 <TextView
                     android:id="@+id/tv_alarm_date"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_150sdp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
                     android:text="@{alarm.alarmDate}"
-                    android:textColor="@color/beige"
-                    android:textSize="@dimen/_12ssp"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/switch_button"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_alarm_time"
+                    app:layout_constraintVertical_bias="0.0"
+                    tool:text="31 December.2023" />
 
                 <Switch
                     android:id="@+id/switch_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:theme="@style/mySwitch"
                     android:checked="true"
                     android:layout_marginEnd="@dimen/_15sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:theme="@style/mySwitch"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

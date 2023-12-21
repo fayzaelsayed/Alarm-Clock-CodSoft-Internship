@@ -24,6 +24,7 @@
     <string name="yes">yes</string>
     <string name="snooze">Snooze</string>
     <string name="dismiss">Dismiss</string>
+    <string name="no_alarms_found">NO Alarms Found</string>
 
     <array name="tones_array">
         <item>Alarm Tone</item>

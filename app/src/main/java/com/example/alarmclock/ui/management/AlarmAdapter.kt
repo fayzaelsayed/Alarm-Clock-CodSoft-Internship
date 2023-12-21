@@ -1,6 +1,7 @@
 package com.example.alarmclock.ui.management
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -28,12 +29,17 @@ class AlarmAdapter : ListAdapter<AlarmEntity, AlarmAdapter.AlarmViewHolder>(Diff
                 when (alarmEntity.alarmState) {
                     "on" -> {
                         switchButton.isChecked = true
-                        cvAlarmItem.setBackgroundColor(cvAlarmItem.context.getColor(R.color.purple))
+                        cvAlarmItem.setBackgroundColor(cvAlarmItem.context.getColor(R.color.green_0))
                     }
                     "off" -> {
                         switchButton.isChecked = false
-                        cvAlarmItem.setBackgroundColor(cvAlarmItem.context.getColor(R.color.light_purple))
+                        cvAlarmItem.setBackgroundColor(cvAlarmItem.context.getColor(R.color.light_green))
                     }
+                }
+                if(alarmEntity.alarmName.isEmpty()){
+                    binding.tvAlarmName.visibility = View.GONE
+                }else{
+                    binding.tvAlarmName.visibility = View.VISIBLE
                 }
                 ibDelete.setOnClickListener {
                     buttonClickListener.onButtonClick(Action.DELETE, alarmEntity)

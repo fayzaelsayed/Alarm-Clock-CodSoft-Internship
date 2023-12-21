@@ -16,8 +16,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.work.WorkManager
 import com.example.alarmclock.R
+import com.example.alarmclock.alarmmanager.AndroidAlarmScheduler
 import com.example.alarmclock.database.AlarmEntity
 import com.example.alarmclock.databinding.FragmentAlarmSettingBinding
 import com.example.alarmclock.utils.BaseFragment
@@ -49,6 +49,7 @@ class AlarmSettingFragment : BaseFragment(false) {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentAlarmSettingBinding.inflate(inflater, container, false)
+        val scheduler = AndroidAlarmScheduler(requireContext())
         args = AlarmSettingFragmentArgs.fromBundle(requireArguments())
         binding.ibClock.setOnClickListener {
             openTimePicker(binding.tvSelectedTime)
@@ -103,18 +104,13 @@ class AlarmSettingFragment : BaseFragment(false) {
         binding.btnAdd.setOnClickListener {
             if (args.alarm != null) {
                 updateAlarm(args.alarm!!)
-                WorkManager.getInstance(requireContext().applicationContext).cancelAllWorkByTag(
-                    args.alarm!!.id
-                )
-                viewModel.myWorkManagerRequest(
-                    setMonth, setDay, setHour, setMinute, requireContext(),
-                    args.alarm!!, numberOfWork
-                )
+                scheduler.cancel(args.alarm!!)
+                scheduler.schedule(args.alarm!!)
                 findNavController().navigateUp()
             } else if (binding.tvSelectedTime.text.isNullOrEmpty()) {
                 Toast.makeText(requireContext(), "Choose the time first", Toast.LENGTH_LONG).show()
             } else {
-                addAndSetAlarm()
+                addAndSetAlarm(scheduler)
                 findNavController().navigateUp()
             }
         }
@@ -168,7 +164,7 @@ class AlarmSettingFragment : BaseFragment(false) {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun openTimePicker(timeTextView: TextView) {
         val calender = Calendar.getInstance()
-        val timePickerDialogListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+        val timePickerDialogListener = TimePickerDialog.OnTimeSetListener { _, hour, minute  ->
             calender.set(
                 setYear,
                 setMonth,
@@ -190,15 +186,15 @@ class AlarmSettingFragment : BaseFragment(false) {
             requireContext(),
             timePickerDialogListener,
             Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
-            Calendar.getInstance().get(Calendar.MINUTE),
+            Calendar.getInstance().get(Calendar.MINUTE) + 1,
             true
         )
         timePickerDialog.show()
     }
 
-    private fun addAndSetAlarm() {
+    private fun addAndSetAlarm(scheduler: AndroidAlarmScheduler) {
         val alarm = AlarmEntity(
-            id = UUID.randomUUID().toString(),
+            id = 0,
             alarmName = binding.edtAlarmName.text.toString(),
             alarmTime = binding.tvSelectedTime.text.toString(),
             alarmDate = binding.tvSelectedDate.text.toString(),
@@ -207,22 +203,13 @@ class AlarmSettingFragment : BaseFragment(false) {
             alarmState = "on"
         )
         viewModel.insertAlarmToDatabase(alarm)
-        viewModel.myWorkManagerRequest(
-            setMonth,
-            setDay,
-            setHour,
-            setMinute,
-            requireContext(),
-            alarm,
-            numberOfWork
-        )
+        scheduler.schedule(alarm)
     }
 
     private fun fillOutTheViewsWithOldData() {
         binding.tvSelectedTime.text = args.alarm?.alarmTime
         binding.tvSelectedDate.text = args.alarm?.alarmDate
         binding.edtAlarmName.setText(args.alarm?.alarmName)
-        binding.tvAlarmTone.text = args.alarm?.alarmTone
         numberOfWork = args.alarm?.workRequest!!
 
     }

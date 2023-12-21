@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AlarmDialogViewModel @Inject constructor(private val dao: AlarmDatabaseDao): ViewModel() {
-    fun updateAlarmState(id: String, state: String) {
+    fun updateAlarmState(id: Int, state: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 dao.updateAlarmState(id, state)

@@ -6,14 +6,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/beige"
         tools:context=".ui.home.HomeFragment">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_current_time_clock"
             android:layout_width="@dimen/_200sdp"
             android:layout_height="@dimen/_200sdp"
-            android:layout_marginTop="@dimen/_80sdp"
+            android:layout_marginTop="@dimen/_100sdp"
             android:elevation="@dimen/_20sdp"
             app:cardCornerRadius="@dimen/_150sdp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -30,7 +29,7 @@
                     android:id="@+id/analog_clock"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/purple"
+                    android:background="@color/green"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -46,9 +45,8 @@
             android:layout_marginTop="@dimen/_25sdp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/time"
-            android:textColor="@color/purple"
-            android:textSize="@dimen/_30ssp"
-            android:textStyle="bold"
+            android:textColor="@color/green"
+            android:textSize="@dimen/_50ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cv_current_time_clock" />
@@ -60,9 +58,8 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/date"
-            android:textColor="@color/purple"
-            android:textSize="@dimen/_30ssp"
-            android:textStyle="bold"
+            android:textColor="@color/green"
+            android:textSize="@dimen/_35ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_time" />

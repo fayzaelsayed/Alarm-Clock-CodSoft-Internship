@@ -6,7 +6,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/beige"
         tools:context=".ui.setting.AlarmSettingFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +16,7 @@
                 android:id="@+id/tv_selected_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/purple"
+                android:textColor="@color/green"
                 android:textSize="@dimen/_30ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/_12_december_2023"
                 android:textAlignment="center"
-                android:textColor="@color/purple"
+                android:textColor="@color/green"
                 android:textSize="@dimen/_20ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +65,7 @@
                 android:ems="10"
                 android:hint="@string/alarm_name"
                 android:inputType="text"
-                android:textColor="@color/purple"
+                android:textColor="@color/green"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/calendarView" />
@@ -78,7 +77,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:text="@string/repeat"
-                android:textColor="@color/purple"
+                android:textColor="@color/green"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/radioGroup"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -104,7 +103,7 @@
                     android:layout_marginTop="5dp"
                     android:checked="true"
                     android:text="@string/once"
-                    android:textColor="@color/purple" />
+                    android:textColor="@color/green" />
 
 
                 <RadioButton
@@ -114,7 +113,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="5dp"
                     android:text="@string/daily"
-                    android:textColor="@color/purple" />
+                    android:textColor="@color/green" />
 
                 <RadioButton
                     android:id="@+id/rb_repeat_monthly"
@@ -123,7 +122,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="5dp"
                     android:text="@string/monthly"
-                    android:textColor="@color/purple" />
+                    android:textColor="@color/green" />
 
                 <RadioButton
                     android:id="@+id/rb_repeat_yearly"
@@ -132,7 +131,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="5dp"
                     android:text="@string/yearly"
-                    android:textColor="@color/purple" />
+                    android:textColor="@color/green" />
 
             </RadioGroup>
 
@@ -143,7 +142,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/alarm_tone"
-                android:textColor="@color/purple"
+                android:textColor="@color/green"
                 android:textSize="@dimen/_18ssp"
                 app:layout_constraintEnd_toStartOf="@+id/spinner"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -154,7 +153,7 @@
                 android:id="@+id/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
@@ -168,7 +167,7 @@
                 android:layout_marginVertical="@dimen/_30sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/purple"
+                android:backgroundTint="@color/green"
                 android:text="@string/add"
                 android:textAllCaps="false"
                 android:textColor="@color/beige"
