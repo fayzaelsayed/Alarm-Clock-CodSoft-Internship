@@ -2,8 +2,9 @@
 - Kotlin
 - MVVM architecture
 - Dependency injection
-- Work manager
 - Room database
+- Alarm manager
+- Notification
 - Coroutines
 - Data binding
 - Navigation component
