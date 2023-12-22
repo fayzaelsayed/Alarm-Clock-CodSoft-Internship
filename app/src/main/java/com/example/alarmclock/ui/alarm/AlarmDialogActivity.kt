@@ -18,7 +18,10 @@ import com.example.alarmclock.R
 import com.example.alarmclock.alarmmanager.AndroidAlarmScheduler
 import com.example.alarmclock.database.AlarmEntity
 import com.example.alarmclock.databinding.ActivityAlarmDialogBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class AlarmDialogActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAlarmDialogBinding
     private var entity: AlarmEntity? = null
@@ -62,7 +65,6 @@ class AlarmDialogActivity : AppCompatActivity() {
                 val notificationManager =
                     getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                 notificationManager.cancel(1)
-                viewModel.updateAlarmState(entity!!.id, "off")
                 finish()
             }
         }
