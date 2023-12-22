@@ -12,11 +12,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AlarmDialogViewModel @Inject constructor(private val dao: AlarmDatabaseDao): ViewModel() {
-    fun updateAlarmState(id: Int, state: String) {
+    fun updateAlarmState(id: String, state: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                dao.updateAlarmState(id, state)
-            }catch (e: Exception){
+                dao.updateAlarmStateWithTime(id, state)
+            } catch (e: Exception) {
                 Log.i("updateAlarmState", "updateAlarmState: $e ")
             }
         }

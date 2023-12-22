@@ -48,15 +48,16 @@ class AlarmDialogActivity : AppCompatActivity() {
             createNotification(entity!!)
             scheduler.cancel(entity!!)
             scheduler.snooze(entity!!)
-            viewModel.updateAlarmState(entity!!.id, entity!!.alarmDate)
             finish()
         }
 
         binding.btnDismissAlert.setOnClickListener {
             stopMediaPlayer()
             if (entity?.workRequest == -1L) {
+                viewModel.updateAlarmState(entity!!.alarmTime,"off")
                 scheduler.cancel(entity!!)
-                viewModel.updateAlarmState(entity!!.id, "off")
+                Log.i("wwwwwwwwww", "onCreate: ${entity!!.alarmState}")
+                Log.i("sss", "onCreate:$entity ")
                 val notificationManager =
                     getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                 notificationManager.cancel(1)

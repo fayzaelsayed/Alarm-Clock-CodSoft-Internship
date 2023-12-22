@@ -23,5 +23,6 @@ interface AlarmDatabaseDao {
     @Query("UPDATE alarm_clock_table SET alarmDate = :date WHERE id = :key ")
     fun updateAlarmDate(key: Int, date:String)
 
-
+    @Query("UPDATE alarm_clock_table SET alarmState = :state WHERE alarmTime = :key ")
+    fun updateAlarmStateWithTime(key: String, state:String)
 }
