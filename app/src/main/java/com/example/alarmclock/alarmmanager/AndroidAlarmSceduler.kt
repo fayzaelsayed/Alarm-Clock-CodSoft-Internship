@@ -63,10 +63,7 @@ class AndroidAlarmScheduler(private val context: Context) : AlarmScheduler {
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
             convertDateTimeToMilliseconds(alarmEntity.alarmDate, alarmEntity.alarmTime),
-            convertDateTimeToMilliseconds(
-                alarmEntity.alarmDate,
-                alarmEntity.alarmTime
-            ) + 5 * 60 * 1000,
+            5 * 60 * 1000,
             PendingIntent.getBroadcast(
                 context,
                 alarmEntity.id,
