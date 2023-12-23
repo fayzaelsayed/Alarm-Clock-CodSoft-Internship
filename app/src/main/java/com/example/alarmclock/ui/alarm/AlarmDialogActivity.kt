@@ -54,7 +54,7 @@ class AlarmDialogActivity : AppCompatActivity() {
         binding.btnDismissAlert.setOnClickListener {
             stopMediaPlayer()
             if (entity?.workRequest == -1L) {
-                viewModel.updateAlarmState(entity!!.alarmTime,"off")
+                viewModel.updateAlarmState(entity!!.alarmId,"off")
                 scheduler.cancel(entity!!)
                 val notificationManager =
                     getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

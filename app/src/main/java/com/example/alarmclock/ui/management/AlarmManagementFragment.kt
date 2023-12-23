@@ -1,9 +1,11 @@
 package com.example.alarmclock.ui.management
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Button
 import androidx.fragment.app.viewModels
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.alarmclock.R
 import com.example.alarmclock.alarmmanager.AndroidAlarmScheduler
+import com.example.alarmclock.alarmmanager.BootReceiver
 import com.example.alarmclock.database.AlarmEntity
 import com.example.alarmclock.databinding.FragmentAlarmManagementBinding
 import com.example.alarmclock.utils.Action
@@ -50,7 +53,6 @@ class AlarmManagementFragment : BaseFragment(true) {
                 val newList = ArrayList<AlarmEntity>()
                 newList.addAll(alarmsList)
                 alarmAdapter.submitList(newList)
-
                 if (alarmsList.isEmpty()) {
                     binding.lottieAnimationView.visibility = View.VISIBLE
                     binding.tvNoAlarms.visibility = View.VISIBLE
@@ -123,25 +125,25 @@ class AlarmManagementFragment : BaseFragment(true) {
 
     fun updateState(alarmEntity: AlarmEntity) {
         if (alarmEntity.alarmState == "on") {
-            viewModel.updateAlarmState(alarmEntity.id, "off")
+            viewModel.updateAlarmState(alarmEntity.alarmId, "off")
             scheduler.cancel(alarmEntity)
         } else {
             val comparisonResult = compareDates(alarmEntity.alarmDate, alarmEntity.alarmTime)
             when {
                 comparisonResult < 0 -> {
                     //in future
-                    viewModel.updateAlarmState(alarmEntity.id, "on")
+                    viewModel.updateAlarmState(alarmEntity.alarmId, "on")
                     scheduler.schedule(alarmEntity)
 
             }
                 comparisonResult > 0 -> {
                     //in paste
-                    viewModel.updateAlarmState(alarmEntity.id, "on")
+                    viewModel.updateAlarmState(alarmEntity.alarmId, "on")
                     viewModel.updateDate(alarmEntity.id, getTomorrowDate(alarmEntity.alarmDate))
                     scheduler.schedule(alarmEntity)
             }
                 else -> {
-                    viewModel.updateAlarmState(alarmEntity.id, "on")
+                    viewModel.updateAlarmState(alarmEntity.alarmId, "on")
                     scheduler.schedule(alarmEntity)
             }
             }

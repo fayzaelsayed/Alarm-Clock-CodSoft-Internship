@@ -3,6 +3,7 @@ package com.example.alarmclock.database
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.Expose
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -10,6 +11,7 @@ import kotlinx.android.parcel.Parcelize
 data class AlarmEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
+    val alarmId: String,
     var alarmName: String,
     var alarmTime: String,
     var alarmDate: String,

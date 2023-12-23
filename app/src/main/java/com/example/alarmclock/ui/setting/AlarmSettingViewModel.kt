@@ -32,6 +32,16 @@ class AlarmSettingViewModel @Inject constructor(private val dao: AlarmDatabaseDa
         }
     }
 
+    fun updateAlarmState(id: String, state: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                dao.updateAlarmState(id, state)
+            } catch (e: Exception) {
+                Log.i("updateAlarmState", "updateAlarmState: $e ")
+            }
+        }
+    }
+
 
 
 }

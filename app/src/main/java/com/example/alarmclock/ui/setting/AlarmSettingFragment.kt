@@ -200,7 +200,8 @@ class AlarmSettingFragment : BaseFragment(false) {
             alarmDate = binding.tvSelectedDate.text.toString(),
             workRequest = numberOfWork,
             alarmTone = binding.tvAlarmTone.text.toString(),
-            alarmState = "on"
+            alarmState = "on",
+            alarmId = UUID.randomUUID().toString()
         )
         viewModel.insertAlarmToDatabase(alarm)
         scheduler.schedule(alarm)
@@ -221,6 +222,7 @@ class AlarmSettingFragment : BaseFragment(false) {
         alarm.alarmTone = binding.tvAlarmTone.text.toString()
 
         viewModel.updateAlarm(alarm)
+        viewModel.updateAlarmState(alarm.alarmId,"on")
     }
 
     override fun onDestroy() {

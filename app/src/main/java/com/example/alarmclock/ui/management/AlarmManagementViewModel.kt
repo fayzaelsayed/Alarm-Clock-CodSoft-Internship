@@ -29,7 +29,7 @@ class AlarmManagementViewModel @Inject constructor(private val dao: AlarmDatabas
         }
     }
 
-    fun updateAlarmState(id: Int, state: String) {
+    fun updateAlarmState(id: String, state: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 dao.updateAlarmState(id, state)
